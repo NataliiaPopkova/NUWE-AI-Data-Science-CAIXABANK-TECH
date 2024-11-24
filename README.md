@@ -1,5 +1,3 @@
-Task 1 uploaded, Task 2 on 15.11, Task 3 on Monday 18.11
-
 # NUWE-AI-Data-Science---CAIXABANK-TECH
 # 📈 AI Agent - Report Maker 📊
 
