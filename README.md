@@ -1,42 +1,88 @@
-# NUWE-AI-Data-Science---CAIXABANK-TECH
-# 📈 AI Agent - Report Maker 📊
+# NUWE-AI-Data-Science---CAIXABANK-TECH 💳
 
-https://nuwe.io/hackathons/the-game-is-hackathon?challenge=python-caixabank-tech 
-
+> **Challenge**: [The Game is Hackathon – CaixaBank Tech @ NUWE](https://nuwe.io/hackathons/the-game-is-hackathon?challenge=python-caixabank-tech)
 
 ## 🌐 Project Overview
-This project was developed as part of my first hackathon, where I placed 19th out of 51 participants. The challenge's goal was to build several machine learning models and an AI agent to analyze transactional data and generate reports. I am currently working on Tasks 4 and 5 of this challenge as part of my personal learning journey, and so far, I am sharing solutions for the first three tasks.
 
-The project is centered around processing transactional data, including customer information, card data, and transaction records, to support tasks such as:
-- Fraud detection
-- Expense forecasting
-- Customer segmentation
+This project was developed as part of my **first hackathon**, where I placed **19th out of 51 participants**. The challenge aimed to build machine learning models and an AI agent to analyze transactional data and generate reports.
 
-The size of the datasets and high class imbalance added the difficulty (transactions data had 13305915 rows and the fraud transaction accounts for 0.15%).
+Since the hackathon, I continued working on the tasks to improve and deepen my understanding of ML for fraud detection and expense prediction.
+
+The tasks included:
+- Fraud detection  
+- Expense forecasting  
+- Customer segmentation  
+
+The dataset was large-scale (13M+ transactions) and **highly imbalanced**, with only **0.15%** of transactions labeled as fraud.
+
+---
 
 ## 🗂️ Dataset
-The project relies on three primary datasets:
-1. **Client Data**: demographic and account information
-2. **Card Data**: details about clients' credit and debit cards
-3. **Transactions**: a detailed record of transactions
 
-We have also received codes dataset to get the transaction categories and transactions labels to train the model.
-Due to data confidentiality and file size, the datasets are not included in this repository. 
+The challenge provided three main datasets:
+
+1. **Client Data** – demographic and account info  
+2. **Card Data** – client credit/debit card details  
+3. **Transactions** – all transaction records  
+
+Additional auxiliary datasets included merchant category codes (`mcc`) and fraud labels.
+
+> ⚠️ **Note**: Due to size and confidentiality, datasets are not included in this repo.
+
+---
 
 <img width="327" alt="Screenshot 2024-10-28 at 00 32 37 copy" src="https://github.com/user-attachments/assets/0c38f51d-9918-41a7-97b8-e9a518550aa3">
 
 
 ## 🎯 Completed Tasks
-The project is divided into multiple stages. During the time of hakaton, I have completed and received 455 of 1000 points for the first three tasks:
 
-### Task 1: Statistical Queries
-Finding answers to specific queries related to clients and transactions, such as identifying the client with the lowest credit limit and latest card expiry date.
+### 📌 Task 1: Statistical Queries
 
-### Task 2: Data Processing Functions
-Implementation of functions for summarizing earnings, expenses, and cash flow within a specified period, using raw transaction data.
+Queries about customer and transaction data, such as finding clients with the lowest credit limits, latest card expirations, etc.
 
-### Task 3: Fraud Detection Model
-Creation of a supervised machine learning model to classify transactions as fraudulent or non-fraudulent. This model is trained to identify suspicious transaction patterns based on transaction frequency, amounts, and merchant details. I am working on achieving a higher balanced accuracy.
+### 🔧 Task 2: Data Processing Functions
+
+Functions that compute:
+- Total earnings  
+- Total expenses  
+- Net cash flow over a selected time period
+
+These were validated via unit tests provided by organizers.
+
+### 🛡️ Task 3: Fraud Detection Model
+
+Developed a supervised ML model to classify transactions as **fraudulent** or **legitimate**.
+
+#### ⚠️ Challenge:
+- Dataset with ~13M rows  
+- Only 0.15% labeled as fraud  
+- Highly imbalanced
+
+#### ✅ Approach:
+- Model used: `XGBoostClassifier`  
+- Applied **SMOTE** to upsample minority class (fraud)  
+- Encoded categorical variables using `OrdinalEncoder`  
+- Used `StratifiedTrainTestSplit`
+
+#### 📊 Final Model Performance:
+> Model trained **after** hackathon using improved pipeline and full training set
+
+- **Balanced Accuracy**: 0.94
+- **Recall (Fraud)**: 0.87  
+- **Precision (Fraud)**: 0.54  
+- **F1-score (Fraud)**: 0.67  
+
+The model shows strong ability to detect rare fraud transactions.
+
+#### 🔍 Feature Importance:
+
+Top features:
+- `mcc` (merchant category code)  
+- `merchant_state`, `merchant_id`, `merchant_city`  
+- `amount`, `hour` of transaction  
+- Note: `id` remained in the dataset and ranked high in importance
+
+---
 
 
 ## 📂 Repository Structure
@@ -73,12 +119,17 @@ The repository structure follows the hackathon's requirements and contains code 
 
 
 ## 🚀 Future Development
-I am actively working on additional tasks, including:
-- **Task 4**: Expense Forecasting Model — Building a time series model to forecast monthly expenses based on historical transaction data.
-- **Task 5**: AI Agent with LangChain — Implementing an AI agent to generate a summary report based on user input, integrating predictive and analytical functions.
 
-I keep working on crafting solutions for these tasks.
+I am actively working on:
+
+- **Task 4**: Expense forecasting (time series model)  
+- **Task 5**: AI agent with LangChain to generate natural language reports based on user input
+
+---
 
 ## 📝 Notes
-This is my first hackathon project, it was quite challenging but also very close to a real life scenario. This was also my first real world experience with big datasets.
+
+This was my **first real-world experience** with big data and real-life classification challenges. It helped me discover a strong interest in **ML for FinTech** and the **ethical value** of fraud detection.
+
+> 📌 **Purpose-driven data science**: I believe that solving real problems like fraud detection brings both technical growth and social impact.
 
